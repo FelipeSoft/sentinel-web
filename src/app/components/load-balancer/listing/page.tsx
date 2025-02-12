@@ -2,7 +2,7 @@
 
 import MainLayout from "@/components/layouts/main-layout";
 import { Button } from "@/components/ui/button";
-import { Blend, Eye, MoveLeft, RefreshCcw } from "lucide-react";
+import { Blend, ChevronLeft, ChevronRight, Eye, MoveLeft, RefreshCcw } from "lucide-react";
 import { useRouter } from "next/navigation";
 import {
     Table,
@@ -30,6 +30,8 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label"
 
 const LoadBalancerListing = () => {
     const router = useRouter();
@@ -67,10 +69,10 @@ const LoadBalancerListing = () => {
                         </TooltipProvider>
                     </div>
                 </nav>
-                <Breadcrumb className="mt-12">
+                <Breadcrumb className="mt-12 mb-6">
                     <BreadcrumbList>
                         <BreadcrumbItem>
-                            <BreadcrumbLink href="/">Components</BreadcrumbLink>
+                            <BreadcrumbLink href="/">Home</BreadcrumbLink>
                         </BreadcrumbItem>
                         <BreadcrumbSeparator />
                         <BreadcrumbItem>
@@ -78,8 +80,7 @@ const LoadBalancerListing = () => {
                         </BreadcrumbItem>
                     </BreadcrumbList>
                 </Breadcrumb>
-                <Table className="mt-4">
-                    <TableCaption>A list of your recent Load Balancers test cases.</TableCaption>
+                <Table>
                     <TableHeader>
                         <TableRow>
                             <TableHead className="w-[50px]"></TableHead>
@@ -99,7 +100,29 @@ const LoadBalancerListing = () => {
                             <TableCell className="text-right">
                                 <TooltipProvider>
                                     <Tooltip>
-                                        <TooltipTrigger asChild>
+                                        <TooltipTrigger>
+                                            <Link className="hover:underline flex justify-end" href="/">
+                                                <span className="sr-only">View more</span>
+                                                <Eye className="transition-all hover:text-primary" />
+                                            </Link>
+                                        </TooltipTrigger>
+                                        <TooltipContent>
+                                            <p>View More</p>
+                                        </TooltipContent>
+                                    </Tooltip>
+                                </TooltipProvider>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell className="font-medium"><Checkbox /></TableCell>
+                            <TableCell className="font-medium">LB001</TableCell>
+                            <TableCell><StatusManager status="completed" /></TableCell>
+                            {/* Throughput / Round Robin / Latency */}
+                            <TableCell>Throughput</TableCell>
+                            <TableCell className="text-right">
+                                <TooltipProvider>
+                                    <Tooltip>
+                                        <TooltipTrigger>
                                             <Link className="hover:underline flex justify-end" href="/">
                                                 <span className="sr-only">View more</span>
                                                 <Eye className="transition-all hover:text-primary" />
@@ -114,6 +137,32 @@ const LoadBalancerListing = () => {
                         </TableRow>
                     </TableBody>
                 </Table>
+                <nav className="bg-muted p-2 flex items-center justify-between">
+                    <span className="text-sm text-neutral-500">2 results found</span>
+                    <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-4">
+                            <div className="flex items-center gap-2">
+                                <Label htmlFor="rows">Rows</Label>
+                                <Input value={1} className="w-[80px]" id="rows" type="number" />
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <Label htmlFor="rows">Page</Label>
+                                <Input value={1} className="w-[80px]" id="rows" type="number" />
+                                of 10
+                            </div>
+                        </div>
+                        <div>
+                            <Button variant={"ghost"}>
+                                <span className="sr-only">Previous</span>
+                                <ChevronLeft />
+                            </Button>
+                            <Button variant={"ghost"}>
+                                <span className="sr-only">Next</span>
+                                <ChevronRight />
+                            </Button>
+                        </div>
+                    </div>
+                </nav>
             </section>
         </MainLayout>
     )

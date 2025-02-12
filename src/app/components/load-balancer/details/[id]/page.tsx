@@ -3,7 +3,7 @@
 import MainLayout from "@/components/layouts/main-layout";
 import { Button } from "@/components/ui/button";
 import { Blend, ChevronLeft, ChevronRight, Eye, FilterIcon, MoveLeft, RefreshCcw, Search } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import {
     Table,
     TableBody,
@@ -33,8 +33,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label"
 
-const LoadBalancerListing = () => {
+const LoadBalanceraDynamicDetails = () => {
     const router = useRouter();
+    const params = useParams();
+    const { id } = params;
 
     return (
         <MainLayout>
@@ -92,57 +94,7 @@ const LoadBalancerListing = () => {
                         <Input id="search" className="w-full border-none" placeholder="Find your Load Balancers by name or tag and press Enter" />
                     </Label>
                 </div>
-                <Table>
-                    <TableHeader>
-                        <TableRow>
-                            <TableHead className="w-[50px]"></TableHead>
-                            <TableHead className="w-[200px]">Load Balancer</TableHead>
-                            <TableHead className="w-[200px]">Tag</TableHead>
-                            <TableHead className="w-[200px]">Category</TableHead>
-                            <TableHead>Status</TableHead>
-                            <TableHead>Test Type</TableHead>
-                            <TableHead className="text-right"></TableHead>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        <TableRow>
-                            <TableCell className="font-medium"><Checkbox /></TableCell>
-                            <TableCell className="font-medium">LB002</TableCell>
-                            <TableCell className="font-medium">BRAZIL_LB</TableCell>
-
-                            {/* Development / Testing / Production / Staging */}
-                            <TableCell className="font-medium">Production</TableCell>
-                            <TableCell><StatusManager status="completed" /></TableCell>
-
-                            {/* Throughput / Round Robin / Latency */}
-                            <TableCell>Throughput</TableCell>
-                            <TableCell className="text-right">
-                                <Link className="hover:underline flex items-center gap-2 justify-end" href="/components/load-balancer/details/1">
-                                    See details
-                                    <Eye />
-                                </Link>
-                            </TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell className="font-medium"><Checkbox /></TableCell>
-                            <TableCell className="font-medium">LB001</TableCell>
-                            <TableCell className="font-medium">BRAZIL_LB</TableCell>
-
-                            {/* Development / Testing / Production / Staging */}
-                            <TableCell className="font-medium">Production</TableCell>
-                            <TableCell><StatusManager status="running" /></TableCell>
-
-                            {/* Throughput / Round Robin / Latency */}
-                            <TableCell>Throughput</TableCell>
-                            <TableCell className="text-right">
-                                <Link className="hover:underline flex items-center gap-2 justify-end" href="/components/load-balancer/details/2">
-                                    See details
-                                    <Eye />
-                                </Link>
-                            </TableCell>
-                        </TableRow>
-                    </TableBody>
-                </Table>
+                <div>Load Balancer details: {id}</div>
                 <nav className="bg-muted p-2 flex items-center justify-between">
                     <span className="text-sm text-neutral-500">2 results found</span>
                     <div className="flex items-center gap-2">
@@ -174,4 +126,4 @@ const LoadBalancerListing = () => {
     )
 }
 
-export default LoadBalancerListing;
+export default LoadBalanceraDynamicDetails;

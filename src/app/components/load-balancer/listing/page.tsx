@@ -2,7 +2,7 @@
 
 import MainLayout from "@/components/layouts/main-layout";
 import { Button } from "@/components/ui/button";
-import { Blend, ChevronLeft, ChevronRight, Eye, MoveLeft, RefreshCcw } from "lucide-react";
+import { Blend, ChevronLeft, ChevronRight, Eye, FilterIcon, MoveLeft, RefreshCcw, Search } from "lucide-react";
 import { useRouter } from "next/navigation";
 import {
     Table,
@@ -69,22 +69,36 @@ const LoadBalancerListing = () => {
                         </TooltipProvider>
                     </div>
                 </nav>
-                <Breadcrumb className="mt-12 mb-6">
-                    <BreadcrumbList>
-                        <BreadcrumbItem>
-                            <BreadcrumbLink href="/">Home</BreadcrumbLink>
-                        </BreadcrumbItem>
-                        <BreadcrumbSeparator />
-                        <BreadcrumbItem>
-                            <BreadcrumbPage className="font-semibold text-lg">Load Balancers</BreadcrumbPage>
-                        </BreadcrumbItem>
-                    </BreadcrumbList>
-                </Breadcrumb>
+                <div className="mt-12 mb-6 flex items-center justify-between">
+                    <Breadcrumb>
+                        <BreadcrumbList>
+                            <BreadcrumbItem>
+                                <BreadcrumbLink href="/">Home</BreadcrumbLink>
+                            </BreadcrumbItem>
+                            <BreadcrumbSeparator />
+                            <BreadcrumbItem>
+                                <BreadcrumbPage className="font-semibold text-lg">Load Balancers</BreadcrumbPage>
+                            </BreadcrumbItem>
+                        </BreadcrumbList>
+                    </Breadcrumb>
+                    <div className="flex items-center gap-4">
+                        <Button variant={"default"}>Edit</Button>
+                        <Button variant={"outline"}>Delete</Button>
+                    </div>
+                </div>
+                <div className="flex items-center gap-2 mb-4">
+                    <Label htmlFor="search" className="w-full flex items-center gap-2 border rounded-sm">
+                        <Search className="ml-2" />
+                        <Input id="search" className="w-full border-none" placeholder="Find your Load Balancers by name or tag and press Enter" />
+                    </Label>
+                </div>
                 <Table>
                     <TableHeader>
                         <TableRow>
                             <TableHead className="w-[50px]"></TableHead>
                             <TableHead className="w-[200px]">Load Balancer</TableHead>
+                            <TableHead className="w-[200px]">Tag</TableHead>
+                            <TableHead className="w-[200px]">Category</TableHead>
                             <TableHead>Status</TableHead>
                             <TableHead>Test Type</TableHead>
                             <TableHead className="text-right"></TableHead>
@@ -93,8 +107,13 @@ const LoadBalancerListing = () => {
                     <TableBody>
                         <TableRow>
                             <TableCell className="font-medium"><Checkbox /></TableCell>
-                            <TableCell className="font-medium">LB001</TableCell>
+                            <TableCell className="font-medium">LB002</TableCell>
+                            <TableCell className="font-medium">BRAZIL_LB</TableCell>
+
+                            {/* Development / Testing / Production / Staging */}
+                            <TableCell className="font-medium">Production</TableCell>
                             <TableCell><StatusManager status="completed" /></TableCell>
+
                             {/* Throughput / Round Robin / Latency */}
                             <TableCell>Throughput</TableCell>
                             <TableCell className="text-right">
@@ -116,7 +135,12 @@ const LoadBalancerListing = () => {
                         <TableRow>
                             <TableCell className="font-medium"><Checkbox /></TableCell>
                             <TableCell className="font-medium">LB001</TableCell>
-                            <TableCell><StatusManager status="completed" /></TableCell>
+                            <TableCell className="font-medium">BRAZIL_LB</TableCell>
+
+                            {/* Development / Testing / Production / Staging */}
+                            <TableCell className="font-medium">Production</TableCell>
+                            <TableCell><StatusManager status="running" /></TableCell>
+
                             {/* Throughput / Round Robin / Latency */}
                             <TableCell>Throughput</TableCell>
                             <TableCell className="text-right">

@@ -2,7 +2,7 @@
 
 import MainLayout from "@/components/layouts/main-layout";
 import { Button } from "@/components/ui/button";
-import { Blend, ChevronLeft, ChevronRight, Eye, FilterIcon, MoveLeft, RefreshCcw, Search } from "lucide-react";
+import { Blend, ChevronLeft, ChevronRight, Download, Eye, FilterIcon, MoveLeft, RefreshCcw, Search, Terminal } from "lucide-react";
 import { useRouter } from "next/navigation";
 import {
     Table,
@@ -35,6 +35,7 @@ import { Label } from "@/components/ui/label"
 
 const LoadBalancerListing = () => {
     const router = useRouter();
+    // if a checkbox inside the list is checked, show more buttons like the 'Run' or other one...
 
     return (
         <MainLayout>
@@ -51,7 +52,6 @@ const LoadBalancerListing = () => {
                                 <h3>Incidents</h3>
                             </div>
                             <Link href="/" className="hover:underline">Passed: 0</Link>
-                            <Link href="/" className="hover:underline">Warnings: 0</Link>
                             <Link href="/" className="hover:underline">Failed: 0</Link>
                         </div>
                         <TooltipProvider>
@@ -82,8 +82,9 @@ const LoadBalancerListing = () => {
                         </BreadcrumbList>
                     </Breadcrumb>
                     <div className="flex items-center gap-4">
-                        <Button variant={"default"}>Edit</Button>
-                        <Button variant={"outline"}>Delete</Button>
+                        <Button variant={"default"}><Terminal />Run</Button>
+                        <Button variant={"outline"}><FilterIcon />Advanced Filter</Button>
+                        <Button variant={"outline"}><Download />Export</Button>
                     </div>
                 </div>
                 <div className="flex items-center gap-2 mb-4">
@@ -101,13 +102,16 @@ const LoadBalancerListing = () => {
                             <TableHead className="w-[200px]">Category</TableHead>
                             <TableHead>Status</TableHead>
                             <TableHead>Test Type</TableHead>
-                            <TableHead className="text-right"></TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
                         <TableRow>
                             <TableCell className="font-medium"><Checkbox /></TableCell>
-                            <TableCell className="font-medium">LB002</TableCell>
+                            <TableCell className="font-medium">
+                                <Link className="text-primary underline" href="/components/load-balancer/details/1">
+                                    LB001
+                                </Link>
+                            </TableCell>
                             <TableCell className="font-medium">BRAZIL_LB</TableCell>
 
                             {/* Development / Testing / Production / Staging */}
@@ -116,16 +120,14 @@ const LoadBalancerListing = () => {
 
                             {/* Throughput / Round Robin / Latency */}
                             <TableCell>Throughput</TableCell>
-                            <TableCell className="text-right">
-                                <Link className="hover:underline flex items-center gap-2 justify-end" href="/components/load-balancer/details/1">
-                                    See details
-                                    <Eye />
-                                </Link>
-                            </TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell className="font-medium"><Checkbox /></TableCell>
-                            <TableCell className="font-medium">LB001</TableCell>
+                            <TableCell className="font-medium">
+                                <Link className="text-primary underline" href="/components/load-balancer/details/2">
+                                    LB002
+                                </Link>
+                            </TableCell>
                             <TableCell className="font-medium">BRAZIL_LB</TableCell>
 
                             {/* Development / Testing / Production / Staging */}
@@ -134,12 +136,6 @@ const LoadBalancerListing = () => {
 
                             {/* Throughput / Round Robin / Latency */}
                             <TableCell>Throughput</TableCell>
-                            <TableCell className="text-right">
-                                <Link className="hover:underline flex items-center gap-2 justify-end" href="/components/load-balancer/details/2">
-                                    See details
-                                    <Eye />
-                                </Link>
-                            </TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
